@@ -21,27 +21,31 @@ the window of exposure if a token is compromised.
 
 ## Installation
 
-### Option 1: Install via Claude Code CLI
+Claude Code discovers skills from a `skills/` directory containing a named subfolder with a `SKILL.md` file. You can install at two scopes:
+
+### Personal (available in all your projects)
 
 ```bash
-claude skill install /path/to/SKILL.md
+# Clone the repo
+git clone https://github.com/robsheppard/Claude-Skill-Git-Commit-Message.git
+
+# Copy into your personal skills directory
+mkdir -p ~/.claude/skills/git-commit-message
+cp Claude-Skill-Git-Commit-Message/SKILL.md ~/.claude/skills/git-commit-message/SKILL.md
 ```
 
-### Option 2: Manual installation
+### Project-level (available only in a specific project)
 
-1. Copy `SKILL.md` into your Claude Code skills directory:
+From your project root:
 
 ```bash
-# Create the skills directory if it doesn't exist
-mkdir -p ~/.claude/skills
-
-# Copy the skill file
-cp SKILL.md ~/.claude/skills/git-commit-message.md
+mkdir -p .claude/skills/git-commit-message
+cp /path/to/SKILL.md .claude/skills/git-commit-message/SKILL.md
 ```
 
-2. Restart Claude Code (or start a new session) to pick up the skill.
+You can commit the `.claude/skills/` directory to share the skill with your team.
 
-> **Note:** The exact installation path may vary depending on your Claude Code version and configuration. Refer to the [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code) for the latest details on custom skill installation.
+Start a new Claude Code session to pick up the skill.
 
 ## Usage
 
