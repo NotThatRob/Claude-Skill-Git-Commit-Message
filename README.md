@@ -2,7 +2,7 @@
 
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) custom skill that generates clear, consistent commit messages following the [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
-Type `/git-commit-message` in Claude Code, provide a diff or describe your changes, and get a ready-to-use commit message.
+Type `/git-commit-message` in Claude Code and the skill handles the rest — it reads your staged changes, analyzes the diff, and produces a ready-to-use commit message.
 
 ## Example
 
@@ -55,16 +55,12 @@ Once installed, invoke the skill in any Claude Code session:
 /git-commit-message
 ```
 
-You can provide input in three ways:
-
-- **Paste a diff** — run `git diff --staged` (or `git diff`) and paste the output
-- **Describe your changes** — explain what you changed in plain language
-- **Both** — provide a diff and additional context
-
-The skill will return a formatted commit message you can copy-paste directly into your commit.
+You can optionally provide context — describe what you changed in plain language, paste a diff, or both. If you don't provide anything, the skill will automatically run `git diff --staged` (or `git diff` if nothing is staged) to read your changes directly.
 
 ## What It Does
 
+- Automatically reads your staged or unstaged diff — no copy-pasting required
+- Analyzes the diff before writing: identifies logical groupings, infers scope from directory/module structure, and detects breaking changes
 - Generates a title in `<type>(<scope>): <summary>` format
 - Picks the appropriate type: `feat`, `fix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
 - Keeps titles under 72 characters, imperative mood, lowercase after the colon
@@ -72,6 +68,7 @@ The skill will return a formatted commit message you can copy-paste directly int
 - Uses bullet points for multi-part changes
 - Flags breaking changes with a `BREAKING CHANGE:` footer
 - Suggests splitting when multiple unrelated changes are bundled together
+- Scales gracefully with large diffs by focusing on intent and impact rather than file-by-file summaries
 
 ## Customization
 
